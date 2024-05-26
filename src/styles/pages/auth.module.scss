@@ -1,0 +1,33 @@
+@import "../base/mixins";
+@import "../base/colors";
+
+.auth-wrapper {
+	@include flex-center;
+	min-height: 100vh;
+	background-color: $clr-neutral-200;
+
+	.auth-container {
+		@include box(70vw, 80vh);
+		position: relative;
+		background-color: $clr-neutral-100;
+		border-radius: 1.2em;
+		box-shadow: 0 0.307em 1.534em 0 rgba(0, 0, 0, 0.3),
+			0 0.461em 1.534em 0 rgba(0, 0, 0, 0.3);
+
+		.auth-forms {
+			position: absolute;
+			top: 0;
+			left: 0;
+			@include box(100%, 100%);
+			@include flex-center-vertical;
+			justify-content: space-around;
+
+			form {
+				@include flex-center-column;
+				width: 40%;
+				min-width: 238px;
+				padding: 0 0.625rem;
+			}
+		}
+	}
+}

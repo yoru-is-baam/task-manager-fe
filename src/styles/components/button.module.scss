@@ -1,0 +1,19 @@
+@import "../base/colors";
+@import "../base/variables";
+
+.btn {
+	cursor: pointer;
+	color: $clr-neutral-100;
+	background-color: $clr-accent-400;
+	border: transparent;
+	padding: 0.7em 1.2em;
+	text-transform: capitalize;
+	display: inline-block;
+	font-size: $fs-300;
+	border-radius: 0.5em;
+	font-weight: $fw-bold;
+}
+
+.btn-neutral {
+	background-color: $clr-accent-900;
+}
