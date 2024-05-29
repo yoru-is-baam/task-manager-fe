@@ -1,7 +1,7 @@
 import { FormGroupProps } from "@/types";
-import FormInput from "../atoms/FormInput";
-import Icon from "../atoms/Icon";
-import styles from "@/styles/components/form-group.module.scss";
+import styles from "./styles.module.scss";
+import Icon from "@/components/atoms/Icon";
+import FormInput from "@/components/atoms/FormInput";
 
 export default function FormGroup({
 	name,

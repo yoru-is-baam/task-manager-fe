@@ -1,5 +1,5 @@
-@import "../base/mixins";
-@import "../base/colors";
+@import "@/styles/mixins";
+@import "@/styles/colors";
 
 .auth-wrapper {
 	@include flex-center;

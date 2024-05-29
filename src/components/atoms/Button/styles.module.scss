@@ -1,5 +1,5 @@
-@import "../base/colors";
-@import "../base/variables";
+@import "@/styles/colors";
+@import "@/styles/variables";
 
 .btn {
 	cursor: pointer;
@@ -14,6 +14,6 @@
 	font-weight: $fw-bold;
 }
 
-.btn-neutral {
+.btn-accent-900 {
 	background-color: $clr-accent-900;
 }
