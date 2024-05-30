@@ -3,6 +3,10 @@
 @import "./colors";
 @import "./reset";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
 	font-size: $fs-400;
 	color: $clr-primary-400;

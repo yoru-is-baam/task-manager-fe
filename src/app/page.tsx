@@ -1,7 +1,5 @@
+import { Button } from "@material-tailwind/react";
+
 export default function Home() {
-	return (
-		<h1 className="title">
-			<span>Hello</span>World!
-		</h1>
-	);
+	return <h1>Hello World!</h1>;
 }
