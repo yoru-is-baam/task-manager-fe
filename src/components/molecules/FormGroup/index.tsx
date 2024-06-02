@@ -1,19 +1,19 @@
-import { FormGroupProps } from "@/types";
+import { FormGroupProps } from "@/interfaces";
 import styles from "./styles.module.scss";
 import Icon from "@/components/atoms/Icon";
 import FormInput from "@/components/atoms/FormInput";
 
 export default function FormGroup({
-	name,
 	size,
-	color,
+	color = styles.clrNeutral700,
 	type,
 	placeholder,
+	icon,
 }: FormGroupProps) {
 	return (
 		<div className={styles["form-group"]}>
 			<span className={styles["form-icon"]}>
-				<Icon name={name} color="#666" />
+				<Icon icon={icon} color={color} size={size} />
 			</span>
 			<FormInput type={type} placeholder={placeholder} />
 		</div>

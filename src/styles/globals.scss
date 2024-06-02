@@ -1,17 +1,12 @@
-@import "./mixins";
-@import "./variables";
-@import "./colors";
-@import "./reset";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import "./mixins";
+@import "./variables";
+@import "./colors";
+
 body {
 	font-size: $fs-400;
 	color: $clr-primary-400;
-}
-
-.clr-neutral-700 {
-	color: $clr-neutral-700;
 }

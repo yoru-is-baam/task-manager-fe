@@ -1,8 +1,8 @@
-import { IconProps } from "@/types";
+import { IconProps } from "@/interfaces";
 import { icons } from "lucide-react";
 
-export default function Icon({ name, color, size }: IconProps) {
-	const LucideIcon = icons[name];
+export default function Icon({ icon, color, size }: IconProps) {
+	const LucideIcon = icons[icon];
 
 	return <LucideIcon color={color} size={size} />;
 }

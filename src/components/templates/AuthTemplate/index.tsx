@@ -9,7 +9,6 @@ export default function AuthTemplate({
 		<div className={styles["auth-wrapper"]}>
 			<div className={styles["auth-container"]}>
 				<div className={styles["auth-forms"]}>{children}</div>
-				<div className="panels-auth-container"></div>
 			</div>
 		</div>
 	);

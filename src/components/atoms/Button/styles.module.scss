@@ -6,12 +6,16 @@
 	color: $clr-neutral-100;
 	background-color: $clr-accent-400;
 	border: transparent;
-	padding: 0.7em 1.2em;
+	padding: 0.7rem 3.2rem;
 	text-transform: capitalize;
 	display: inline-block;
-	font-size: $fs-300;
-	border-radius: 0.5em;
+	font-size: $fs-600;
+	border-radius: 100vmax;
 	font-weight: $fw-bold;
+
+	&:hover {
+		background-color: $clr-accent-600;
+	}
 }
 
 .btn-accent-900 {

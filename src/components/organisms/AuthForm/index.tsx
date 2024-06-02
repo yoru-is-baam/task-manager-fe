@@ -3,30 +3,26 @@ import FormTitle from "@/components/atoms/FormTitle";
 import CallToAction from "@/components/molecules/CallToAction";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
-
-type AuthFormProps = {
-	className?: string;
-	children?: React.ReactNode;
-	formTitle: string;
-	btnTitle: string;
-	question: string;
-	actionText: string;
-};
+import { AuthFormProps } from "@/interfaces";
 
 export default function AuthForm({
+	onSubmit,
 	className,
 	children,
-	formTitle,
-	btnTitle,
+	title,
+	btnContent,
 	question,
+	href,
 	actionText,
 }: AuthFormProps) {
 	return (
-		<form action="" className={classNames(className, styles.form)}>
-			<FormTitle title={formTitle} />
-			<div className={styles["form-groups"]}>{children}</div>
-			<Button title={btnTitle} />
-			<CallToAction question={question} actionText={actionText} />
+		<form onSubmit={onSubmit} className={classNames(styles.form, className)}>
+			<FormTitle>{title}</FormTitle>
+			<div className={classNames(styles["form-groups"])}>{children}</div>
+			<Button className="mb-7" type="submit">
+				{btnContent}
+			</Button>
+			<CallToAction href={href} question={question} actionText={actionText} />
 		</form>
 	);
 }

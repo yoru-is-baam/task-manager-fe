@@ -1,6 +1,9 @@
-import { FormTitleProps } from "@/types";
+import { FormTitleProps } from "@/interfaces";
+import classNames from "classnames";
 import styles from "./styles.module.scss";
 
-export default function FormTitle({ title }: FormTitleProps) {
-	return <h2 className={styles["form-title"]}>{title}</h2>;
+export default function FormTitle({ children, className }: FormTitleProps) {
+	return (
+		<h2 className={classNames(styles["form-title"], className)}>{children}</h2>
+	);
 }

@@ -1,2 +1,16 @@
+@import "@/styles/variables";
+@import "@/styles/colors";
+
 .call-to-action {
+	font-size: $fs-600;
+	font-weight: $fw-semi-bold;
+
+	.action-text {
+		font-weight: $fw-bold;
+		color: $clr-accent-500;
+
+		&:hover {
+			color: $clr-accent-600;
+		}
+	}
 }

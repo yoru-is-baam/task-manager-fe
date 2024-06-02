@@ -1,5 +1,14 @@
+@import "@/styles/mixins";
+
 .form {
+	@include flex-center-column;
+	width: 60%;
+	min-width: 238px;
+	padding: 0 0.625rem;
+
 	.form-groups {
 		width: 100%;
+		@include flex-column;
+		margin-block: 2rem;
 	}
 }

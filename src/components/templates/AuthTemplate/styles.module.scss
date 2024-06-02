@@ -7,7 +7,7 @@
 	background-color: $clr-neutral-200;
 
 	.auth-container {
-		@include box(70vw, 80vh);
+		@include box(50vw, 80vh);
 		position: relative;
 		background-color: $clr-neutral-100;
 		border-radius: 1.2em;
@@ -21,13 +21,6 @@
 			@include box(100%, 100%);
 			@include flex-center-vertical;
 			justify-content: space-around;
-
-			form {
-				@include flex-center-column;
-				width: 40%;
-				min-width: 238px;
-				padding: 0 0.625rem;
-			}
 		}
 	}
 }

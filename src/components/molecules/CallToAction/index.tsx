@@ -1,14 +1,18 @@
-import { CallToActionProps } from "@/types";
+import { CallToActionProps } from "@/interfaces";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 export default function CallToAction({
 	question,
 	actionText,
+	href,
 }: CallToActionProps) {
 	return (
 		<div className={styles["call-to-action"]}>
-			<span>{question}</span>
-			<button>{actionText}</button>
+			{question}{" "}
+			<Link href={href} className={styles["action-text"]}>
+				{actionText}
+			</Link>
 		</div>
 	);
 }
