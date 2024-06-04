@@ -6,7 +6,10 @@ export const metadata = {
 	title: "Registration",
 };
 
-export default function Register() {
+export default async function Register() {
+	const { data } = await register();
+	console.log(data.accessToken);
+
 	return (
 		<AuthTemplate>
 			<AuthForm
@@ -23,4 +26,16 @@ export default function Register() {
 			</AuthForm>
 		</AuthTemplate>
 	);
+}
+
+async function register() {
+	const res = await fetch("http://localhost:3000/api/v1/auth/register", {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		method: "POST",
+		body: JSON.stringify({ email: "kiet@gmail.com" }),
+	});
+
+	return res.json();
 }
