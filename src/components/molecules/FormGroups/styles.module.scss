@@ -1,0 +1,6 @@
+@import "@/styles/mixins";
+
+.form-groups {
+	width: 100%;
+	@include flex-column;
+}

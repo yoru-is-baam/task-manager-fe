@@ -1,7 +1,5 @@
-import { icons } from "lucide-react";
+import { icons, LucideProps } from "lucide-react";
 
-export interface IconProps {
+export interface IconProps extends LucideProps {
 	icon: keyof typeof icons;
-	color?: string;
-	size?: string;
 }
