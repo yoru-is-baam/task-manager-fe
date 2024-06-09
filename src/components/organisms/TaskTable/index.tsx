@@ -1,5 +1,3 @@
-"use client";
-
 import Icon from "@/components/atoms/Icon";
 import {
 	Button,
@@ -18,13 +16,8 @@ import {
 	MenuList,
 	MenuItem,
 } from "@/components/material-tailwind";
-import { useState } from "react";
-import { DateRange } from "react-date-range";
-
-interface TaskTableProps {
-	children?: React.ReactNode;
-	className?: string;
-}
+import Pagination from "@/components/molecules/Pagination";
+import { CreateTaskDialogButton } from "@/components/organisms/Dialogs";
 
 const TABLE_HEAD = ["Title", "Status", "Deadline", "Last Update", ""];
 const TABLE_ROWS = [
@@ -44,21 +37,7 @@ const TABLE_ROWS = [
 	},
 ];
 
-export default function TaskTable({ children }: TaskTableProps) {
-	const [state, setState] = useState<
-		{
-			startDate: Date;
-			endDate: Date | null;
-			key: string;
-		}[]
-	>([
-		{
-			startDate: new Date(),
-			endDate: null,
-			key: "selection",
-		},
-	]);
-
+export default function TaskTable() {
 	return (
 		<ThemeProvider>
 			<Card className="h-full w-full">
@@ -72,9 +51,7 @@ export default function TaskTable({ children }: TaskTableProps) {
 								See information about all tasks
 							</Typography>
 						</div>
-						<Button className="flex items-center gap-3" size="md">
-							<Icon icon="ListPlus" size={16} /> Create task
-						</Button>
+						<CreateTaskDialogButton />
 					</div>
 					<div className="flex items-center justify-between gap-4">
 						<div className="flex items-center gap-4">
@@ -105,15 +82,13 @@ export default function TaskTable({ children }: TaskTableProps) {
 									</MenuItem>
 								</MenuList>
 							</Menu>
-							<DateRange
-								editableDateInputs={true}
-								onChange={(item) => setState([item.selection])}
-								moveRangeOnFirstSelection={false}
-								ranges={state}
-							/>
 						</div>
 						<div className="w-72">
-							<Input label="Search" icon={<Icon icon="Search" size={20} />} />
+							<Input
+								label="Search"
+								icon={<Icon icon="Search" size={20} />}
+								crossOrigin={undefined}
+							/>
 						</div>
 					</div>
 				</CardHeader>
@@ -206,35 +181,7 @@ export default function TaskTable({ children }: TaskTableProps) {
 					</table>
 				</CardBody>
 				<CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-					<Button variant="outlined" size="sm">
-						Previous
-					</Button>
-					<div className="flex items-center gap-2">
-						<IconButton variant="outlined" size="sm">
-							1
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							2
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							3
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							...
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							8
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							9
-						</IconButton>
-						<IconButton variant="text" size="sm">
-							10
-						</IconButton>
-					</div>
-					<Button variant="outlined" size="sm">
-						Next
-					</Button>
+					<Pagination />
 				</CardFooter>
 			</Card>
 		</ThemeProvider>
