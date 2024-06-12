@@ -1,1 +1,1 @@
-export * from "./CreateTaskDialogButton";
+export * from "./TaskDialog";

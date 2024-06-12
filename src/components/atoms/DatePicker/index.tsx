@@ -6,27 +6,22 @@ import {
 } from "@/components/material-tailwind";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
-import { useState } from "react";
 import Icon from "@/components/atoms/Icon";
+import { Dispatch, SetStateAction } from "react";
 
-export default function DatePicker() {
-	const [date, setDate] = useState<Date>();
-	const [openPopover, setOpenPopover] = useState(false);
+type DatePickerProps = {
+	date?: Date;
+	setDate: Dispatch<SetStateAction<Date | undefined>>;
+};
 
-	const triggers = {
-		onClick: () => handler,
-	};
-
-	const handler = () => {
-		let datePicker =
-			document.querySelector(".date-picker")?.parentElement?.parentElement;
-		datePicker?.classList.add("absolute", "z-[10000]");
-		setOpenPopover(!openPopover);
+export default function DatePicker({ date, setDate }: DatePickerProps) {
+	const handleSelectDate = (selectedDate: Date | undefined) => {
+		setDate(selectedDate);
 	};
 
 	return (
-		<Popover placement="bottom" open={openPopover} handler={handler}>
-			<PopoverHandler {...triggers}>
+		<Popover>
+			<PopoverHandler>
 				<Input
 					label="Select a Date"
 					onChange={() => null}
@@ -34,11 +29,12 @@ export default function DatePicker() {
 					crossOrigin={undefined}
 				/>
 			</PopoverHandler>
-			<PopoverContent {...triggers}>
+			<PopoverContent className="absolute z-[10000]">
 				<DayPicker
 					mode="single"
+					required
 					selected={date}
-					onSelect={setDate}
+					onSelect={handleSelectDate}
 					showOutsideDays
 					className="border-0 date-picker"
 					classNames={{

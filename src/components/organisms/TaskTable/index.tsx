@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/atoms/Icon";
 import {
 	Button,
@@ -11,35 +13,57 @@ import {
 	Tooltip,
 	IconButton,
 	CardFooter,
-	Menu,
-	MenuHandler,
-	MenuList,
-	MenuItem,
 } from "@/components/material-tailwind";
 import Pagination from "@/components/molecules/Pagination";
-import { CreateTaskDialogButton } from "@/components/organisms/Dialogs";
+import StatusMenu from "@/components/molecules/StatusMenu";
+import { TaskDialog } from "@/components/organisms/Dialogs";
+import { TaskStatus } from "@/constants/enum";
+import { Task } from "@/constants/types";
+import { format } from "date-fns";
+import { useState } from "react";
 
 const TABLE_HEAD = ["Title", "Status", "Deadline", "Last Update", ""];
-const TABLE_ROWS = [
+const TABLE_ROWS: Task[] = [
 	{
 		id: 1,
 		title: "This is a title one",
-		status: "To Do",
-		deadline: "23/06/2024",
-		lastUpdate: "22/06/2024",
+		description: null,
+		status: TaskStatus.TO_DO,
+		deadline: "2024-06-23",
+		updatedAt: "2024-06-22",
 	},
 	{
 		id: 2,
 		title: "This is a title two",
-		status: "Done",
-		deadline: "23/06/2024",
-		lastUpdate: "22/06/2024",
+		description: null,
+		status: TaskStatus.DONE,
+		deadline: "2024-06-23",
+		updatedAt: "2024-06-22",
 	},
 ];
 
 export default function TaskTable() {
+	const [selectedTask, setSelectedTask] = useState<Task>();
+	const [status, setStatus] = useState<TaskStatus | "all">("all");
+	const [isTaskDialogOpen, setIsTaskDialogOpen] = useState<boolean>(false);
+
+	const handleTaskDialogOpen = (task?: Task) => {
+		setSelectedTask(task);
+		setIsTaskDialogOpen(true);
+	};
+
+	const handleTaskSave = (newTask: Task) => {
+		console.log(selectedTask);
+	};
+
 	return (
 		<ThemeProvider>
+			<TaskDialog
+				open={isTaskDialogOpen}
+				setOpen={setIsTaskDialogOpen}
+				task={selectedTask}
+				onSave={handleTaskSave}
+			/>
 			<Card className="h-full w-full">
 				<CardHeader floated={false} shadow={false} className="rounded-none">
 					<div className="mb-8 flex items-center justify-between gap-8">
@@ -51,37 +75,17 @@ export default function TaskTable() {
 								See information about all tasks
 							</Typography>
 						</div>
-						<CreateTaskDialogButton />
+						<Button
+							className="flex items-center gap-3"
+							size="md"
+							onClick={() => handleTaskDialogOpen()}
+						>
+							<Icon icon="ListPlus" size={16} /> Create task
+						</Button>
 					</div>
 					<div className="flex items-center justify-between gap-4">
 						<div className="flex items-center gap-4">
-							<Menu>
-								<MenuHandler>
-									<Button
-										size="md"
-										variant="outlined"
-										className="flex items-center gap-3"
-									>
-										<span className="block h-2 w-2 rounded-full bg-green-400 content-['']" />
-										All Status
-										<Icon icon="ChevronDown" size={16} />
-									</Button>
-								</MenuHandler>
-								<MenuList className="p-1">
-									<MenuItem className="flex items-center gap-3">
-										<span className="block h-2 w-2 rounded-full bg-yellow-400 content-['']" />
-										Done
-									</MenuItem>
-									<MenuItem className="flex items-center gap-3">
-										<span className="block h-2 w-2 rounded-full bg-red-400 content-['']" />
-										To Do
-									</MenuItem>
-									<MenuItem className="flex items-center gap-3">
-										<span className="block h-2 w-2 rounded-full bg-purple-400 content-['']" />
-										In Progress
-									</MenuItem>
-								</MenuList>
-							</Menu>
+							<StatusMenu status={status} setStatus={setStatus} />
 						</div>
 						<div className="w-72">
 							<Input
@@ -145,7 +149,11 @@ export default function TaskTable() {
 													variant="ghost"
 													size="sm"
 													value={row.status}
-													color={row.status === "Done" ? "green" : "blue-gray"}
+													color={
+														row.status === TaskStatus.DONE
+															? "green"
+															: "blue-gray"
+													}
 												/>
 											</div>
 										</td>
@@ -155,7 +163,7 @@ export default function TaskTable() {
 												color="blue-gray"
 												className="font-normal"
 											>
-												{row.deadline}
+												{format(new Date(row.deadline), "dd/MM/yyyy")}
 											</Typography>
 										</td>
 										<td className={classes}>
@@ -164,12 +172,15 @@ export default function TaskTable() {
 												color="blue-gray"
 												className="font-normal"
 											>
-												{row.lastUpdate}
+												{format(new Date(row.updatedAt!), "dd/MM/yyyy")}
 											</Typography>
 										</td>
 										<td className={classes}>
 											<Tooltip content="Update Task">
-												<IconButton variant="text">
+												<IconButton
+													variant="text"
+													onClick={() => handleTaskDialogOpen(row)}
+												>
 													<Icon icon="Pencil" size={16} fill="#111" />
 												</IconButton>
 											</Tooltip>
