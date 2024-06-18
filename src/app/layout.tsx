@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
-import { ReactReduxProvider, ThemeProvider } from "@/providers";
+import { ThemeProvider } from "@/components/material-tailwind";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +18,7 @@ export default function RootLayout({
 	return (
 		<ThemeProvider>
 			<html lang="en">
-				<body className={inter.className}>
-					<ReactReduxProvider>{children}</ReactReduxProvider>
-				</body>
+				<body className={inter.className}>{children}</body>
 			</html>
 		</ThemeProvider>
 	);

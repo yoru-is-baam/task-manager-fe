@@ -6,6 +6,13 @@ type StatusMenuItem = {
 	content: string;
 };
 
+export const FULL_STATUS_MENU_ITEMS = [
+	{
+		label: "To Do",
+		value: "to-do",
+	},
+];
+
 export const STATUS_MENU_ITEMS: StatusMenuItem[] = [
 	{
 		id: TaskStatus.DONE,

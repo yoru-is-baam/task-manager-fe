@@ -6,7 +6,6 @@ import {
 	Card,
 	CardHeader,
 	Input,
-	ThemeProvider,
 	Typography,
 	CardBody,
 	Chip,
@@ -16,6 +15,7 @@ import {
 } from "@/components/material-tailwind";
 import Pagination from "@/components/molecules/Pagination";
 import StatusMenu from "@/components/molecules/StatusMenu";
+import TaskRow from "@/components/molecules/TaskRow";
 import { TaskDialog } from "@/components/organisms/Dialogs";
 import { TaskStatus } from "@/constants/enum";
 import { Task } from "@/constants/types";
@@ -57,7 +57,7 @@ export default function TaskTable() {
 	};
 
 	return (
-		<ThemeProvider>
+		<>
 			<TaskDialog
 				open={isTaskDialogOpen}
 				setOpen={setIsTaskDialogOpen}
@@ -111,14 +111,7 @@ export default function TaskTable() {
 												color="blue-gray"
 												className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
 											>
-												{head}{" "}
-												{index !== TABLE_HEAD.length - 1 && (
-													<Icon
-														icon="ChevronsUpDown"
-														size={16}
-														style={{ strokeWidth: 2 }}
-													/>
-												)}
+												{head}
 											</Typography>
 										</th>
 									);
@@ -133,59 +126,12 @@ export default function TaskTable() {
 									: "p-4 border-b border-blue-gray-50";
 
 								return (
-									<tr key={row.id}>
-										<td className={classes}>
-											<Typography
-												variant="small"
-												color="blue-gray"
-												className="font-normal"
-											>
-												{row.title}
-											</Typography>
-										</td>
-										<td className={classes}>
-											<div className="w-max">
-												<Chip
-													variant="ghost"
-													size="sm"
-													value={row.status}
-													color={
-														row.status === TaskStatus.DONE
-															? "green"
-															: "blue-gray"
-													}
-												/>
-											</div>
-										</td>
-										<td className={classes}>
-											<Typography
-												variant="small"
-												color="blue-gray"
-												className="font-normal"
-											>
-												{format(new Date(row.deadline), "dd/MM/yyyy")}
-											</Typography>
-										</td>
-										<td className={classes}>
-											<Typography
-												variant="small"
-												color="blue-gray"
-												className="font-normal"
-											>
-												{format(new Date(row.updatedAt!), "dd/MM/yyyy")}
-											</Typography>
-										</td>
-										<td className={classes}>
-											<Tooltip content="Update Task">
-												<IconButton
-													variant="text"
-													onClick={() => handleTaskDialogOpen(row)}
-												>
-													<Icon icon="Pencil" size={16} fill="#111" />
-												</IconButton>
-											</Tooltip>
-										</td>
-									</tr>
+									<TaskRow
+										key={row.id}
+										task={row}
+										isLastClasses={classes}
+										handleTaskDialogOpen={handleTaskDialogOpen}
+									/>
 								);
 							})}
 						</tbody>
@@ -195,6 +141,6 @@ export default function TaskTable() {
 					<Pagination />
 				</CardFooter>
 			</Card>
-		</ThemeProvider>
+		</>
 	);
 }
