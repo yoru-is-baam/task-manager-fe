@@ -1,5 +1,9 @@
-import TaskTable from "@/components/organisms/TaskTable";
+import { Card } from "@/components/material-tailwind";
 
-export default function TaskTemplate() {
-	return <TaskTable />;
+export default function TaskTemplate({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	return <Card className="h-full w-full">{children}</Card>;
 }
